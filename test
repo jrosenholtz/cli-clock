@@ -1,0 +1,7 @@
+#!/bin/python
+import configparser
+
+config = configparser.ConfigParser()
+config.read('cli-clock.conf')
+border = config.get('Visuals', 'set_border')
+print(border)
