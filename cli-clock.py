@@ -10,10 +10,17 @@ config.read('cli-clock.ini')
 set_border = config.getboolean('Visuals', 'set_border')
 smooth_border = config.getboolean('Visuals', 'smooth_border')
 font_style = config.get('Visuals', 'font_style')
+clock_format = config.get('Format', 'clock_format')
+clock_format = clock_format.split(',')
+clock_justify = config.get('Format', 'clock_justify')
 
 def timeUpdate():
+    time = ''
     now =  datetime.now()
-    return now.strftime("%H:%M:%S")
+    for item in clock_format:
+        time = time + now.strftime(item)
+    time = time.replace(r'\n', '\n')
+    return time
 
 def screenResize(y, x):
     newY, newX = screen.getmaxyx()
@@ -23,17 +30,23 @@ def screenResize(y, x):
 
 def getTarget():
     currentTime = timeUpdate()
-    drawTarget = pyfiglet.figlet_format(currentTime, font = font_style)
+    drawTarget = pyfiglet.figlet_format(currentTime, font = font_style, justify = clock_justify)
     splitTarget = drawTarget.splitlines()
     return splitTarget
 
 def getDrawPos(y, x):
     target = getTarget()
+    longest = 0
     midX = int(x / 2)
     midY = int(y / 2) - int(len(target) / 2)
-    midTarget = int(len(target) / 2)
-    middleMessage = int(len(target[midTarget]) / 2 )
-    xPos = midX - middleMessage 
+    for num, line in enumerate(target):
+        if int(len(target[longest])) < int(len(target[num])):
+            longest = num
+    middleMessage = int(len(target[num]) / 2)
+    if clock_justify == 'center':
+        xPos = midX - middleMessage - int(middleMessage / 2.2)
+    else:
+        xPos = midX - middleMessage
     return midY, xPos
 
 def cursesInit():

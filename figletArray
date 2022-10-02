@@ -1,0 +1,6 @@
+#!/bin/python
+
+import pyfiglet
+import curses
+import
+
