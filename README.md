@@ -4,6 +4,7 @@ This is a project I am writing for myself purely for practice, but feel free to 
 
 # Dependencies
 Pyfiglet:
+
   $ pip3 install pyfiglet
 
 # Usage
