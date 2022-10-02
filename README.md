@@ -20,6 +20,8 @@ read config.ini, it should explain everything. press q or ctrl+c to quit the pro
 
 ![Oct::164813](https://user-images.githubusercontent.com/112635067/193477762-4e34e6eb-3c24-4fe0-822c-ac59546885b1.png)
 
+![Oct::165323](https://user-images.githubusercontent.com/112635067/193477941-15eaa41c-6d99-439c-904c-cef5352cb101.png)
+
 # TODO
 * color support
 * timer function
