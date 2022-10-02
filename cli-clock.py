@@ -6,8 +6,10 @@ from os import system, name
 import curses
 
 config = configparser.ConfigParser()
-config.read('cli-clock.conf')
+config.read('cli-clock.ini')
 set_border = config.getboolean('Visuals', 'set_border')
+smooth_border = config.getboolean('Visuals', 'smooth_border')
+font_style = config.get('Visuals', 'font_style')
 
 def timeUpdate():
     now =  datetime.now()
@@ -21,7 +23,7 @@ def screenResize(y, x):
 
 def getTarget():
     currentTime = timeUpdate()
-    drawTarget = pyfiglet.figlet_format(currentTime)
+    drawTarget = pyfiglet.figlet_format(currentTime, font = font_style)
     splitTarget = drawTarget.splitlines()
     return splitTarget
 
@@ -43,7 +45,11 @@ def cursesInit():
 
 def borders(screen):
     if set_border == True:
-        screen.border()
+        if smooth_border == True:
+            screen.border()
+        else:
+            screen.border('|', '|', '-', '-', '+', '+', '+', '+')
+
 
 def drawTime(screen):
     cursesInit()
@@ -62,3 +68,4 @@ def main(screen):
         drawTime(screen)
 
 curses.wrapper(main)
+
