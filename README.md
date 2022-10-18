@@ -10,7 +10,7 @@ $ pip3 install pyfiglet
 ```
 
 # Usage
-read config.ini, it should explain everything. press q or ctrl+c to quit the program. 
+read cli-clock.ini, it should explain everything. press q or ctrl+c to quit the program. 
 
 # Screenshots
 
